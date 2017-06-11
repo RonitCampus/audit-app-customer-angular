@@ -1,0 +1,38 @@
+<div class="container" [ngBusy]="busy">
+  <div class="row">
+    <div class="col-lg-12 well">
+      <div>
+        <fieldset>
+          <legend>Pending Ncs</legend>
+
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>NcId</th>
+                <th>Description</th>
+                <th>Nc Date</th>
+                <th>Raised By</th>
+                <th>Expected Close Date</th>
+                <th>Status</th>
+                <th>Close</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let nc of ncList ; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{nc?.ncId}}</td>
+                <td>{{nc?.ncDescription}}</td>
+                <td>{{nc.ncDate}}</td>
+                <td>{{nc.ncRaisedBy}}</td>
+                <td>{{nc.ncExpectedCloseDate}}</td>
+                <td>{{ getStatus( nc.ncStatus )}}</td>
+                <td><button *ngIf=" ! isIssueClosed(nc?.ncStatus)" class="btn btn-performaudit btn-xs btn-info" [disabled]="isIssueWithAuditor(nc?.ncStatus)" (click)="onResolveNcClick(nc.ncId)">Close</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
